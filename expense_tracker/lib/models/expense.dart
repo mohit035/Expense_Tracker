@@ -36,3 +36,23 @@ class Expense {
 
 // In Dart "Initializer Lists" can be used to initialize class properties like id with values that are not received as constructor function arguments.
 // An enum is a special "class" that represents a group of constants(unchangable variables)
+
+class ExpenseBucket {
+  const ExpenseBucket({required this.category, required this.expenses});
+  ExpenseBucket.forCategory(List<Expense> allExpenses, this.category)
+      : expenses = allExpenses
+            .where((expense) => expense.category == category)
+            .toList();
+
+  // adding the additional constructor function or alternative constructor fn to the default constructor function  in the class
+  final Category category;
+  final List<Expense> expenses;
+  double get totalExpenses {
+    double sum = 0;
+    for (final expense in expenses) {
+// sum = sum+expense.amount;
+      sum += expense.amount;
+    }
+    return sum;
+  }
+}
